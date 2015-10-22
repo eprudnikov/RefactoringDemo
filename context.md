@@ -1,4 +1,4 @@
 *In this file I describe context of the project, i.e. what precondition I assume.*
 
 #Current situation
-This is legacy code that came to a team. For now, it's enough to investigate it and cover by test where it's necessary.
+Behaviour of the system is fixed by tests. It's decided to make Customer.Statement more testable and readable. In procedural manner.
