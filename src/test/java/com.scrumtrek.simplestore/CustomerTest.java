@@ -114,16 +114,76 @@ public class CustomerTest {
     }
 
     @Test
-    public void testChildrenMovieFor6Day() {
+    public void testChildrenMovieFor5Day() {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Children), 5));
         String statement = customer.Statement();
         assertStatement(statement, EXTRA__MOVIE_COST * 2);
     }
 
     @Test
+    public void testRegularMovieAmountFor1Day() {
+        double result = customer.calcAmount(PriceCodes.Regular, 1);
+        assertEquals(REGULAR_MOVIE_COST, result);
+    }
+
+    @Test
+    public void testRegularMovieAmountFor2Day() {
+        double result = customer.calcAmount(PriceCodes.Regular, 2);
+        assertEquals(REGULAR_MOVIE_COST, result);
+    }
+
+    @Test
+    public void testRegularMovieAmountFor3Day() {
+        double result = customer.calcAmount(PriceCodes.Regular, 3);
+        assertEquals(REGULAR_MOVIE_COST + EXTRA__MOVIE_COST, result);
+    }
+
+    @Test
+    public void testRegularMovieAmountFor4Day() {
+        double result = customer.calcAmount(PriceCodes.Regular, 4);
+        assertEquals(REGULAR_MOVIE_COST + EXTRA__MOVIE_COST * 2, result);
+    }
+
+    @Test
+    public void testNewReleaseAmountFor1Day() {
+        double result = customer.calcAmount(PriceCodes.NewRelease, 1);
+        assertEquals(NEW_RELEASE_COST, result);
+    }
+
+    @Test
+    public void testNewReleaseAmountFor5Day() {
+        double result = customer.calcAmount(PriceCodes.NewRelease, 5);
+        assertEquals(NEW_RELEASE_COST * 5, result);
+    }
+
+    @Test
+    public void testChildrenMovieAmountFor1Day() {
+        double result = customer.calcAmount(PriceCodes.Children, 1);
+        assertEquals(CHILDREN_MOVIE_COST, result);
+    }
+
+    @Test
+    public void testChildrenMovieAmountFor3Day() {
+        double result = customer.calcAmount(PriceCodes.Children, 3);
+        assertEquals(CHILDREN_MOVIE_COST, result);
+    }
+
+    @Test
+    public void testChildrenMovieAmountFor4Day() {
+        double result = customer.calcAmount(PriceCodes.Children, 4);
+        assertEquals(EXTRA__MOVIE_COST, result);
+    }
+
+    @Test
+    public void testChildrenMovieAmountFor5Day() {
+        double result = customer.calcAmount(PriceCodes.Children, 5);
+        assertEquals(EXTRA__MOVIE_COST * 2, result);
+    }
+
+    @Test
     public void testPointsCalculationForRegularMovieForDifferentDaysNumber() {
         for (int days = 1; days < 5; days++) {
-            int result = customer.calculateFrequentPointsForRental(PriceCodes.Regular, days);
+            int result = customer.calcFrequentPointsForRental(PriceCodes.Regular, days);
             assertEquals(1, result);
         }
     }
@@ -131,21 +191,21 @@ public class CustomerTest {
     @Test
     public void testPointsCalculationForChildrenMovieForDifferentDaysNumber() {
         for (int days = 1; days < 5; days++) {
-            int result = customer.calculateFrequentPointsForRental(PriceCodes.Regular, days);
+            int result = customer.calcFrequentPointsForRental(PriceCodes.Regular, days);
             assertEquals(1, result);
         }
     }
 
     @Test
-    public void testPointsCalculationForNewReleaseForFirstDay() {
-        int result = customer.calculateFrequentPointsForRental(PriceCodes.Regular, 1);
+    public void testPointsCalculationForNewReleaseFor1stDay() {
+        int result = customer.calcFrequentPointsForRental(PriceCodes.Regular, 1);
         assertEquals(1, result);
     }
 
     @Test
-    public void testPointsCalculationForNewReleaseForMoreThanOneDay() {
+    public void testPointsCalculationForNewReleaseForMoreThan1Day() {
         for (int days = 2; days < 5; days++) {
-            int result = customer.calculateFrequentPointsForRental(PriceCodes.NewRelease, days);
+            int result = customer.calcFrequentPointsForRental(PriceCodes.NewRelease, days);
             assertEquals(2, result);
         }
     }

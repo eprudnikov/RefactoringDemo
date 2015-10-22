@@ -23,46 +23,45 @@ public class Customer {
 		String result = "Rental record for " + name + "\n";
 		
 		for(Rental each: rentals) {
-			double thisAmount = 0;
-			
-			// Determine amounts for each line
-			switch(each.getMovie().getPriceCode()) {
-				case Regular:
-					thisAmount += 2;
-					if (each.getDaysRented() > 2)
-					{
-						thisAmount += (each.getDaysRented() - 2) * 1.5;
-					}
-					break;
-	
-				case NewRelease:
-					thisAmount += each.getDaysRented() * 3;
-					break;
-	
-				case Children:
-					thisAmount += 1.5;
-					if (each.getDaysRented() > 3)
-					{
-						thisAmount = (each.getDaysRented() - 3) * 1.5;
-					}
-					break;
-			}
+			double thisAmount = calcAmount(each.getMovie().getPriceCode(), each.getDaysRented());
+			frequentRenterPoints += calcFrequentPointsForRental(each.getMovie().getPriceCode(), each.getDaysRented());
 
-			// Add frequent renter points
-			frequentRenterPoints += calculateFrequentPointsForRental(each.getMovie().getPriceCode(), each.getDaysRented());
-
-			// Show figures for this rental
 			result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
 			totalAmount += thisAmount;
 		}
 
-		// Add footer lines
 		result += "Amount owed is " + totalAmount + "\n";
 		result += "You earned " + frequentRenterPoints + " frequent renter points.";
 		return result;
 	}
 
-	protected int calculateFrequentPointsForRental(PriceCodes code, int daysRented) {
+	protected double calcAmount(PriceCodes code, int daysRented) {
+		double result = 0.;
+		switch(code) {
+            case Regular:
+                result += 2;
+                if (daysRented > 2)
+                {
+                    result += (daysRented - 2) * 1.5;
+                }
+                break;
+
+            case NewRelease:
+                result += daysRented * 3;
+                break;
+
+            case Children:
+                result += 1.5;
+                if (daysRented > 3)
+                {
+                    result = (daysRented - 3) * 1.5;
+                }
+                break;
+        }
+		return result;
+	}
+
+	protected int calcFrequentPointsForRental(PriceCodes code, int daysRented) {
 		if (code == PriceCodes.NewRelease && daysRented > 1)
         {
             return 2;
