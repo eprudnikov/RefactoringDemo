@@ -3,6 +3,7 @@ package com.scrumtrek.simplestore;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
@@ -10,13 +11,39 @@ import static junit.framework.Assert.assertTrue;
  * For now, it's simple test fixing contract of the most difficult complex method - Statement.
  */
 public class CustomerTest {
+    public static final String CUSTOMER = "Test customer";
     public static final String TITLE = "Test movie";
+    public static final String EXPECTED_OUTPUT = "Rental record for " + CUSTOMER +
+            "\n\tCinderella\t3.0\n" +
+            "\tStar Wars\t6.5\n" +
+            "\tGladiator\t15.0\n" +
+            "Amount owed is 24.5\n" +
+            "You earned 4 frequent renter points.";
 
     private Customer customer;
 
     @Before
     public void initTest() {
         customer = new Customer("Test customer");
+    }
+
+    @Test
+    public void testFormat() {
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.Childrens);
+        Movie movStarWars = new Movie("Star Wars", PriceCodes.Regular);
+        Movie movGladiator = new Movie("Gladiator", PriceCodes.NewRelease);
+
+        Rental rental1 = new Rental(movCinderella, 5);
+        Rental rental2 = new Rental(movStarWars, 5);
+        Rental rental3 = new Rental(movGladiator, 5);
+
+        customer.addRental(rental1);
+        customer.addRental(rental2);
+        customer.addRental(rental3);
+
+        String statement = customer.Statement();
+        assertNotNull(statement);
+        assertEquals(EXPECTED_OUTPUT, statement);
     }
 
     @Test
