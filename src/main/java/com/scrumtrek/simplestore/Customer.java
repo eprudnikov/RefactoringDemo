@@ -4,20 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-	private String m_Name;
-	private List<Rental> m_Rentals = new ArrayList<Rental>();
+	private String name;
+	private List<Rental> rentals = new ArrayList<Rental>();
 
 	public Customer(String name) {
-		m_Name = name;
+		this.name = name;
 	}
-
-	public String getName() {
-		return m_Name;
-	}
-
 
 	public void addRental(Rental arg){
-		m_Rentals.add(arg);
+		rentals.add(arg);
 	}
 
 	public String Statement()
@@ -25,9 +20,9 @@ public class Customer {
 		double totalAmount = 0;
 		int frequentRenterPoints = 0;
 				
-		String result = "Rental record for " + m_Name + "\n";
+		String result = "Rental record for " + name + "\n";
 		
-		for(Rental each: m_Rentals) {
+		for(Rental each: rentals) {
 			double thisAmount = 0;
 			
 			// Determine amounts for each line
@@ -44,7 +39,7 @@ public class Customer {
 					thisAmount += each.getDaysRented() * 3;
 					break;
 	
-				case Childrens:
+				case Children:
 					thisAmount += 1.5;
 					if (each.getDaysRented() > 3)
 					{

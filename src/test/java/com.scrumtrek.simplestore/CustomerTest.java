@@ -33,7 +33,7 @@ public class CustomerTest {
 
     @Test
     public void testFormat() {
-        Movie movCinderella = new Movie("Cinderella", PriceCodes.Childrens);
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.Children);
         Movie movStarWars = new Movie("Star Wars", PriceCodes.Regular);
         Movie movGladiator = new Movie("Gladiator", PriceCodes.NewRelease);
 
@@ -94,28 +94,28 @@ public class CustomerTest {
 
     @Test
     public void testChildrenMovieFor1Day() {
-        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 1));
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Children), 1));
         String statement = customer.Statement();
         assertStatement(statement, CHILDREN_MOVIE_COST);
     }
 
     @Test
     public void testChildrenMovieFor3Day() {
-        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 3));
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Children), 3));
         String statement = customer.Statement();
         assertStatement(statement, CHILDREN_MOVIE_COST);
     }
 
     @Test
     public void testChildrenMovieFor4Day() {
-        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 4));
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Children), 4));
         String statement = customer.Statement();
         assertStatement(statement, EXTRA__MOVIE_COST);
     }
 
     @Test
     public void testChildrenMovieFor6Day() {
-        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 5));
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Children), 5));
         String statement = customer.Statement();
         assertStatement(statement, EXTRA__MOVIE_COST * 2);
     }
