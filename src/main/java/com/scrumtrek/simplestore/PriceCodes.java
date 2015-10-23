@@ -1,7 +1,7 @@
 package com.scrumtrek.simplestore;
 
 public enum PriceCodes {
-	Regular,
-	NewRelease,
-	Children
+    Regular,
+    NewRelease,
+    Children
 }
