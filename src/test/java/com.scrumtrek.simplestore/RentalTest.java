@@ -75,4 +75,38 @@ public class RentalTest {
         double result = rental.calculateAmount();
         assertEquals(EXTRA__MOVIE_COST * 2, result);
     }
+
+    @Test
+    public void testPointsCalculationForRegularMovieForDifferentDaysNumber() {
+        for (int days = 1; days < 5; days++) {
+            Rental rental = new Rental(new Movie(TITLE, PriceCodes.Regular), days);
+            int result = rental.calculateFrequentPoints();
+            assertEquals(1, result);
+        }
+    }
+
+    @Test
+    public void testPointsCalculationForChildrenMovieForDifferentDaysNumber() {
+        for (int days = 1; days < 5; days++) {
+            Rental rental = new Rental(new Movie(TITLE, PriceCodes.Regular), days);
+            int result = rental.calculateFrequentPoints();
+            assertEquals(1, result);
+        }
+    }
+
+    @Test
+    public void testPointsCalculationForNewReleaseFor1stDay() {
+        Rental rental = new Rental(new Movie(TITLE, PriceCodes.Regular), 1);
+        int result = rental.calculateFrequentPoints();
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testPointsCalculationForNewReleaseForMoreThan1Day() {
+        for (int days = 2; days < 5; days++) {
+            Rental rental = new Rental(new Movie(TITLE, PriceCodes.NewRelease), days);
+            int result = rental.calculateFrequentPoints();
+            assertEquals(2, result);
+        }
+    }
 }

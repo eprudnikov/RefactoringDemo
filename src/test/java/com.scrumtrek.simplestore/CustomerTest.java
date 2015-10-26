@@ -120,36 +120,6 @@ public class CustomerTest {
         assertStatement(statement, EXTRA__MOVIE_COST * 2);
     }
 
-    @Test
-    public void testPointsCalculationForRegularMovieForDifferentDaysNumber() {
-        for (int days = 1; days < 5; days++) {
-            int result = customer.calcFrequentPointsForRental(PriceCodes.Regular, days);
-            assertEquals(1, result);
-        }
-    }
-
-    @Test
-    public void testPointsCalculationForChildrenMovieForDifferentDaysNumber() {
-        for (int days = 1; days < 5; days++) {
-            int result = customer.calcFrequentPointsForRental(PriceCodes.Regular, days);
-            assertEquals(1, result);
-        }
-    }
-
-    @Test
-    public void testPointsCalculationForNewReleaseFor1stDay() {
-        int result = customer.calcFrequentPointsForRental(PriceCodes.Regular, 1);
-        assertEquals(1, result);
-    }
-
-    @Test
-    public void testPointsCalculationForNewReleaseForMoreThan1Day() {
-        for (int days = 2; days < 5; days++) {
-            int result = customer.calcFrequentPointsForRental(PriceCodes.NewRelease, days);
-            assertEquals(2, result);
-        }
-    }
-
     public void assertStatement(String statement, double amount) {
         assertNotNull(statement);
         assertTrue(statement, statement.contains(TITLE + "\t" + amount));

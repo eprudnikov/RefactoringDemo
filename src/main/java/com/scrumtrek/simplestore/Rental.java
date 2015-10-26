@@ -9,10 +9,6 @@ public class Rental {
         this.daysRented = daysRented;
     }
 
-    public int getDaysRented() {
-        return daysRented;
-    }
-
     public Movie getMovie() {
         return movie;
     }
@@ -39,6 +35,13 @@ public class Rental {
                 break;
         }
         return result;
+    }
+
+    public int calculateFrequentPoints() {
+        if (movie.getPriceCode() == PriceCodes.NewRelease && daysRented > 1) {
+            return 2;
+        }
+        return 1;
     }
 }
 

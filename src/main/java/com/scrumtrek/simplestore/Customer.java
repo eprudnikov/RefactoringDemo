@@ -23,7 +23,7 @@ public class Customer {
 
         for (Rental each : rentals) {
             double thisAmount = each.calculateAmount();
-            frequentRenterPoints += calcFrequentPointsForRental(each.getMovie().getPriceCode(), each.getDaysRented());
+            frequentRenterPoints += each.calculateFrequentPoints();
 
             result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
             totalAmount += thisAmount;
@@ -32,13 +32,6 @@ public class Customer {
         result += "Amount owed is " + totalAmount + "\n";
         result += "You earned " + frequentRenterPoints + " frequent renter points.";
         return result;
-    }
-
-    protected int calcFrequentPointsForRental(PriceCodes code, int daysRented) {
-        if (code == PriceCodes.NewRelease && daysRented > 1) {
-            return 2;
-        }
-        return 1;
     }
 }
 
