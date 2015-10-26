@@ -121,66 +121,6 @@ public class CustomerTest {
     }
 
     @Test
-    public void testRegularMovieAmountFor1Day() {
-        double result = customer.calcAmount(PriceCodes.Regular, 1);
-        assertEquals(REGULAR_MOVIE_COST, result);
-    }
-
-    @Test
-    public void testRegularMovieAmountFor2Day() {
-        double result = customer.calcAmount(PriceCodes.Regular, 2);
-        assertEquals(REGULAR_MOVIE_COST, result);
-    }
-
-    @Test
-    public void testRegularMovieAmountFor3Day() {
-        double result = customer.calcAmount(PriceCodes.Regular, 3);
-        assertEquals(REGULAR_MOVIE_COST + EXTRA__MOVIE_COST, result);
-    }
-
-    @Test
-    public void testRegularMovieAmountFor4Day() {
-        double result = customer.calcAmount(PriceCodes.Regular, 4);
-        assertEquals(REGULAR_MOVIE_COST + EXTRA__MOVIE_COST * 2, result);
-    }
-
-    @Test
-    public void testNewReleaseAmountFor1Day() {
-        double result = customer.calcAmount(PriceCodes.NewRelease, 1);
-        assertEquals(NEW_RELEASE_COST, result);
-    }
-
-    @Test
-    public void testNewReleaseAmountFor5Day() {
-        double result = customer.calcAmount(PriceCodes.NewRelease, 5);
-        assertEquals(NEW_RELEASE_COST * 5, result);
-    }
-
-    @Test
-    public void testChildrenMovieAmountFor1Day() {
-        double result = customer.calcAmount(PriceCodes.Children, 1);
-        assertEquals(CHILDREN_MOVIE_COST, result);
-    }
-
-    @Test
-    public void testChildrenMovieAmountFor3Day() {
-        double result = customer.calcAmount(PriceCodes.Children, 3);
-        assertEquals(CHILDREN_MOVIE_COST, result);
-    }
-
-    @Test
-    public void testChildrenMovieAmountFor4Day() {
-        double result = customer.calcAmount(PriceCodes.Children, 4);
-        assertEquals(EXTRA__MOVIE_COST, result);
-    }
-
-    @Test
-    public void testChildrenMovieAmountFor5Day() {
-        double result = customer.calcAmount(PriceCodes.Children, 5);
-        assertEquals(EXTRA__MOVIE_COST * 2, result);
-    }
-
-    @Test
     public void testPointsCalculationForRegularMovieForDifferentDaysNumber() {
         for (int days = 1; days < 5; days++) {
             int result = customer.calcFrequentPointsForRental(PriceCodes.Regular, days);

@@ -22,7 +22,7 @@ public class Customer {
         String result = "Rental record for " + name + "\n";
 
         for (Rental each : rentals) {
-            double thisAmount = calcAmount(each.getMovie().getPriceCode(), each.getDaysRented());
+            double thisAmount = each.calculateAmount();
             frequentRenterPoints += calcFrequentPointsForRental(each.getMovie().getPriceCode(), each.getDaysRented());
 
             result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
@@ -31,30 +31,6 @@ public class Customer {
 
         result += "Amount owed is " + totalAmount + "\n";
         result += "You earned " + frequentRenterPoints + " frequent renter points.";
-        return result;
-    }
-
-    protected double calcAmount(PriceCodes code, int daysRented) {
-        double result = 0.;
-        switch (code) {
-            case Regular:
-                result += 2;
-                if (daysRented > 2) {
-                    result += (daysRented - 2) * 1.5;
-                }
-                break;
-
-            case NewRelease:
-                result += daysRented * 3;
-                break;
-
-            case Children:
-                result += 1.5;
-                if (daysRented > 3) {
-                    result = (daysRented - 3) * 1.5;
-                }
-                break;
-        }
         return result;
     }
 
