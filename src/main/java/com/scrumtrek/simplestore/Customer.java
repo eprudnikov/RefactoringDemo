@@ -15,7 +15,7 @@ public class Customer {
         rentals.add(arg);
     }
 
-    public String Statement() {
+    public String getStatement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
 
