@@ -1,29 +1,22 @@
 package com.scrumtrek.simplestore;
 
+import com.scrumtrek.simplestore.pricing.FixPriceThresholdStrategy;
+import com.scrumtrek.simplestore.pricing.MoreDaysMoreMoneyStrategy;
+import com.scrumtrek.simplestore.pricing.NoFixedPriceStrategy;
+import com.scrumtrek.simplestore.pricing.PriceStrategy;
+
 public enum PriceCodes {
-    REGULAR(2., 1.5, 2),
-    NEW_RELEASE(0., 3., 0),
-    CHILDREN(1.5, 1.5, 3);
+    REGULAR(new MoreDaysMoreMoneyStrategy(2., 1.5, 2)),
+    NEW_RELEASE(new NoFixedPriceStrategy(3.)),
+    CHILDREN(new FixPriceThresholdStrategy(1.5, 1.5, 3));
 
-    private double fixPrice;
-    private double extraPrice;
-    private int daysBeforeExtra;
+    private PriceStrategy priceStrategy;
 
-    PriceCodes(double usualPrice, double extraPrice, int daysBeforeExtra) {
-        this.fixPrice = usualPrice;
-        this.extraPrice = extraPrice;
-        this.daysBeforeExtra = daysBeforeExtra;
+    PriceCodes(PriceStrategy priceStrategy) {
+        this.priceStrategy = priceStrategy;
     }
 
-    public double getFixPrice() {
-        return fixPrice;
-    }
-
-    public double getExtraPrice() {
-        return extraPrice;
-    }
-
-    public int getDaysBeforeExtra() {
-        return daysBeforeExtra;
+    public PriceStrategy getPriceStrategy() {
+        return priceStrategy;
     }
 }

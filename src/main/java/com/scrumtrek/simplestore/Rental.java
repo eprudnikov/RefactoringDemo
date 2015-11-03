@@ -14,28 +14,7 @@ public class Rental {
     }
 
     public double calculateAmount() {
-        double result = 0.;
-        PriceCodes code = movie.getPriceCode();
-        switch (code) {
-            case REGULAR:
-                result += code.getFixPrice();
-                if (daysRented > code.getDaysBeforeExtra()) {
-                    result += (daysRented - code.getDaysBeforeExtra()) * code.getExtraPrice();
-                }
-                break;
-
-            case NEW_RELEASE:
-                result += daysRented * 3;
-                break;
-
-            case CHILDREN:
-                result += code.getFixPrice();
-                if (daysRented > code.getDaysBeforeExtra()) {
-                    result = (daysRented - code.getDaysBeforeExtra()) * code.getExtraPrice();
-                }
-                break;
-        }
-        return result;
+        return movie.getPriceCode().getPriceStrategy().calculateAmount(daysRented);
     }
 
     public int calculateFrequentPoints() {
