@@ -16,18 +16,18 @@ public class Rental {
     public double calculateAmount() {
         double result = 0.;
         switch (movie.getPriceCode()) {
-            case Regular:
+            case REGULAR:
                 result += 2;
                 if (daysRented > 2) {
                     result += (daysRented - 2) * 1.5;
                 }
                 break;
 
-            case NewRelease:
+            case NEW_RELEASE:
                 result += daysRented * 3;
                 break;
 
-            case Children:
+            case CHILDREN:
                 result += 1.5;
                 if (daysRented > 3) {
                     result = (daysRented - 3) * 1.5;
@@ -38,7 +38,7 @@ public class Rental {
     }
 
     public int calculateFrequentPoints() {
-        if (movie.getPriceCode() == PriceCodes.NewRelease && daysRented > 1) {
+        if (movie.getPriceCode() == PriceCodes.NEW_RELEASE && daysRented > 1) {
             return 2;
         }
         return 1;
