@@ -10,6 +10,7 @@ public class NoFixedPriceStrategy implements PriceStrategy {
         this.price = price;
     }
 
+    @Override
     public double calculateAmount(int daysRented) {
         return price * daysRented;
     }

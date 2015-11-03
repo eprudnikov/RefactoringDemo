@@ -14,6 +14,7 @@ public class MoreDaysMoreMoneyStrategy implements PriceStrategy {
         this.daysBeforeExtra = daysBeforeExtra;
     }
 
+    @Override
     public double calculateAmount(int daysRented) {
         double result = fixPrice;
         if (daysRented > daysBeforeExtra) {

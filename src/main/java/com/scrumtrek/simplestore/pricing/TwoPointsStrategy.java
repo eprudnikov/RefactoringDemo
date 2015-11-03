@@ -11,6 +11,7 @@ public class TwoPointsStrategy implements FrequentPointsCalculationStrategy {
         this.threshold = threshold;
     }
 
+    @Override
     public int calculatePoints(int daysRented) {
         if (daysRented > threshold) {
             return pointAfterThreshold;

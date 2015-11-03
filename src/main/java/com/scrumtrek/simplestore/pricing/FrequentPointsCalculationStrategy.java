@@ -1,5 +1,7 @@
 package com.scrumtrek.simplestore.pricing;
 
-public interface FrequentPointsCalculationStrategy {
+import java.io.Serializable;
+
+public interface FrequentPointsCalculationStrategy extends Serializable{
     int calculatePoints(int daysRented);
 }

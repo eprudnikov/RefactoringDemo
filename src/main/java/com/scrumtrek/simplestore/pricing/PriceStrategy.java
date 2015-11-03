@@ -1,5 +1,7 @@
 package com.scrumtrek.simplestore.pricing;
 
-public interface PriceStrategy {
+import java.io.Serializable;
+
+public interface PriceStrategy extends Serializable {
     double calculateAmount(int daysRented);
 }
