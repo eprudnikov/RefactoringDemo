@@ -21,8 +21,4 @@ public class FixPriceThresholdStrategy implements PriceStrategy {
         }
         return result;
     }
-
-    public double calculateFrequentPoints(int daysRented) {
-        return 0;
-    }
 }

@@ -13,8 +13,4 @@ public class NoFixedPriceStrategy implements PriceStrategy {
     public double calculateAmount(int daysRented) {
         return price * daysRented;
     }
-
-    public double calculateFrequentPoints(int daysRented) {
-        return 0;
-    }
 }
