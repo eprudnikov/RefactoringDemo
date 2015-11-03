@@ -15,11 +15,12 @@ public class Rental {
 
     public double calculateAmount() {
         double result = 0.;
-        switch (movie.getPriceCode()) {
+        PriceCodes code = movie.getPriceCode();
+        switch (code) {
             case REGULAR:
-                result += 2;
-                if (daysRented > 2) {
-                    result += (daysRented - 2) * 1.5;
+                result += code.getFixPrice();
+                if (daysRented > code.getDaysBeforeExtra()) {
+                    result += (daysRented - code.getDaysBeforeExtra()) * code.getExtraPrice();
                 }
                 break;
 
@@ -28,9 +29,9 @@ public class Rental {
                 break;
 
             case CHILDREN:
-                result += 1.5;
-                if (daysRented > 3) {
-                    result = (daysRented - 3) * 1.5;
+                result += code.getFixPrice();
+                if (daysRented > code.getDaysBeforeExtra()) {
+                    result = (daysRented - code.getDaysBeforeExtra()) * code.getExtraPrice();
                 }
                 break;
         }
